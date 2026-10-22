@@ -1,0 +1,725 @@
+<!doctype html>
+<html lang="ko" data-deck="career-future-jobs-1">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>미래 직업 변화 탐색하기</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/N-lifescience/resonance@2/engine/exploragram.css">
+<script defer src="https://cdn.jsdelivr.net/gh/N-lifescience/resonance@2/engine/exploragram.js"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;500;700&display=swap">
+<style>
+/* 원본 색: 남보라·보라·연분홍 */
+body[data-theme="ppt"] {
+  --accent: #6C66B5; --tab: #24223B; --tab-ink: #FFFFFF; --table-head: #6C66B5; --table-side: #EBE9F8; --bar-c: #6C66B5;
+  --navy: #24223B; --purple: #6C66B5; --deep: #4B4593; --lav: #EBE9F8; --paper: #F7F6FB;
+  --pink: #F2A9C0; --rose: #C2416A; --muted: #4A4766; --line: #DCD9EC; --night2: #34315A;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+body[data-theme="ppt"] section.slide { background: var(--paper); color: var(--navy); }
+.jua, section.slide h1, section.slide h2 { font-family: 'Jua', 'Noto Sans KR', sans-serif; font-weight: 400; }
+section.slide h2 { font-size: 44px; line-height: 1.2; color: var(--navy); margin: 0 0 20px; }
+section.slide h2::after { display: none; }
+p.tag { margin: 0 0 6px; font-size: 24px; font-weight: 700; color: var(--rose); letter-spacing: 1px; }
+
+/* 어두운 장(표지·발문·활동 안내) */
+body[data-theme="ppt"] section.slide.dark { background: var(--navy); color: #F7F6FB; --tab: #F2A9C0; --tab-ink: #24223B; }
+body[data-theme="ppt"] section.slide.dark h1,
+body[data-theme="ppt"] section.slide.dark h2,
+body[data-theme="ppt"] section.slide.dark::after { color: #F7F6FB; }
+section.slide.dark p.tag { color: var(--pink); }
+section.slide.dark .sub { color: #CFCCE8; }
+body[data-theme="ppt"] section.slide.violet { background: var(--purple); color: #F7F6FB; --tab: #24223B; }
+body[data-theme="ppt"] section.slide.violet h2, body[data-theme="ppt"] section.slide.violet::after { color: #F7F6FB; }
+section.slide.violet p.tag { color: #F7F6FB; }
+
+/* 표지 */
+body[data-theme="ppt"] section.slide.cover { background: var(--navy); }
+.cv { margin-top: 96px; width: 660px; }
+section.slide.cover h1 { font-size: 76px; line-height: 1.2; color: #F7F6FB; margin: 14px 0 22px; }
+.cv .sub { font-size: 32px; color: #CFCCE8; margin: 0; }
+.cv-card { position: absolute; width: 300px; height: 210px; border-radius: 22px; }
+.cv-card.a { right: 100px; top: 150px; background: var(--purple); border: 6px solid #8F8AD6; transform: rotate(8deg); }
+.cv-card.b { right: 170px; top: 250px; background: #F7F6FB; border: 6px solid var(--purple); transform: rotate(-6deg); display: grid; place-items: center; }
+.cv-card.b b { font-family: 'Jua', sans-serif; font-weight: 400; font-size: 40px; color: var(--deep); }
+
+/* 발문 */
+.hook-q { font-size: 46px; line-height: 1.4; margin: 10px 0 26px; }
+section.slide.violet .short { --accent: #24223B; }
+section.slide.violet .short .ask { color: #F7F6FB; }
+
+/* 손 신호 */
+.signals { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 18px; }
+.signals > div { background: #fff; border: 3px solid var(--line); border-radius: 22px; padding: 26px 28px; }
+.signals .hand { font-family: 'Jua', sans-serif; font-size: 44px; color: var(--purple); margin: 0 0 8px; }
+.signals .kind { font-size: 32px; font-weight: 700; margin: 0 0 6px; }
+.signals .hint { font-size: 26px; color: var(--muted); margin: 0; }
+.note { font-size: 28px; color: var(--muted); margin-top: 26px; }
+
+/* 퀴즈 */
+.job { font-size: 64px !important; margin: 0 0 6px !important; }
+.desc { margin: 0 0 4px; color: var(--muted); }
+.ask { font-size: 26px; color: #6B6886; margin: 0 0 14px; }
+.think { margin-top: 10px; padding: 14px 24px; border-left: 10px solid var(--pink); background: #fff; border-radius: 0 14px 14px 0; font-size: 28px; }
+
+/* 세 갈래 정리 */
+.three { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 10px; }
+.three > div { border-radius: 22px; padding: 26px; background: #fff; border: 3px solid var(--line); }
+.three .h { font-family: 'Jua', sans-serif; font-size: 40px; margin: 0 0 10px; color: var(--deep); }
+.three > div:nth-child(2) { background: var(--lav); }
+.three > div:nth-child(3) { background: #FBE3EB; border-color: var(--pink); }
+.three p { font-size: 28px; margin: 0; }
+.bridge { margin-top: 26px; font-size: 30px; font-weight: 700; color: var(--deep); }
+
+/* 도미노 */
+.dom-big { font-size: 60px !important; line-height: 1.3 !important; margin-top: 12px !important; }
+.dom-row { display: flex; gap: 26px; align-items: flex-end; height: 150px; margin-top: 34px; }
+.dom-row i { display: block; width: 48px; height: 130px; border-radius: 8px; transform-origin: right bottom; }
+.chain { display: grid; grid-template-columns: 1fr 34px 1fr 34px 1fr 34px 1fr 34px 1fr; align-items: stretch; margin-top: 12px; }
+.chain .ar { align-self: center; text-align: center; font-size: 36px; color: var(--purple); margin: 0; }
+.chain .bx { background: #fff; border: 3px solid var(--line); border-radius: 20px; padding: 18px 16px; }
+.chain .bx.first { background: var(--purple); border-color: var(--purple); color: #F7F6FB; }
+.chain .bx.last { background: var(--pink); border-color: var(--pink); }
+.chain .bx b { display: block; font-family: 'Jua', sans-serif; font-weight: 400; font-size: 32px; color: var(--purple); margin-bottom: 8px; }
+.chain .bx.first b { color: var(--pink); }
+.chain .bx.last b { color: var(--navy); }
+.chain .bx p { font-size: 26px; line-height: 1.4; margin: 0; }
+
+/* 번호 줄 */
+.rows { display: flex; flex-direction: column; gap: 12px; margin-top: 4px; }
+.rows > div { display: flex; gap: 24px; align-items: center; background: #fff; border-radius: 18px; padding: 8px 28px; }
+.rows .n { flex: none; width: 46px; font-family: 'Jua', sans-serif; font-size: 44px; line-height: 1; color: var(--purple); margin: 0; }
+.rows .n.plus { color: var(--rose); }
+.rows p:not(.n) { margin: 0; font-size: 30px; }
+section.slide.dark .rows > div { background: var(--night2); }
+section.slide.dark .rows .n { color: var(--pink); }
+.two { display: grid; grid-template-columns: 1fr 360px; gap: 30px; align-items: start; }
+.below { margin-top: 16px; }
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.grid2.rows { display: grid; }
+.side { display: flex; flex-direction: column; gap: 18px; }
+.goal { border: 3px dashed var(--purple); border-radius: 18px; padding: 16px 22px; font-size: 28px; color: #CFCCE8; margin: 0; }
+section.slide.dark .timer, section.slide.dark .picker { color: var(--navy); }
+
+/* 막혔을 때 질문 카드 */
+.cards6 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 0; }
+.cards6 > div { background: #fff; border: 3px solid var(--line); border-radius: 18px; padding: 12px 20px; }
+.cards6 .c { font-size: 28px; font-weight: 700; color: var(--purple); margin: 0 0 6px; }
+.cards6 .q2 { font-size: 28px; margin: 0; }
+
+/* 예시 표 */
+table.compare.ex { width: 100%; font-size: 24px; line-height: 1.35; }
+table.compare.ex th, table.compare.ex td { padding: 10px 12px; vertical-align: top; }
+table.compare.ex td:last-child { font-weight: 700; color: var(--deep); }
+
+/* 구인 광고 예시 */
+.ad-wrap { display: grid; grid-template-columns: 1fr 740px; gap: 32px; align-items: start; }
+.ad-chain { font-size: 28px !important; color: var(--muted); }
+.ad { background: #fff; border: 4px solid var(--navy); border-radius: 22px; overflow: hidden; }
+.ad-top { background: var(--navy); padding: 12px 28px; display: flex; justify-content: space-between; align-items: center; }
+.ad-top p { margin: 0; font-family: 'Jua', sans-serif; font-size: 32px; color: var(--pink); }
+.ad-top span { font-size: 22px; font-weight: 700; color: var(--navy); background: var(--pink); padding: 4px 16px; border-radius: 999px; }
+.ad-body { padding: 12px 24px; }
+.ad-body .ttl { font-family: 'Jua', sans-serif; font-size: 40px; color: var(--deep); margin: 0 0 4px; }
+.ad-body p { font-size: 24px; line-height: 1.35; margin: 0 0 6px; }
+.ad-body .slogan { font-size: 26px; font-weight: 700; color: var(--rose); margin: 4px 0 0; }
+
+/* 정리 */
+.wrap-q { font-size: 64px !important; line-height: 1.3 !important; margin: 20px 0 24px !important; }
+
+/* 익스플로라그램 공통 */
+.ex2 { display: grid; grid-template-columns: 1fr 420px; gap: 28px; align-items: start; }
+.ex2 > .right { display: flex; flex-direction: column; gap: 10px; }
+.lab { margin: 0; font-size: 24px; font-weight: 700; color: var(--muted); }
+.res { margin: 0; font-size: 26px; line-height: 1.45; font-weight: 700; color: var(--navy); }
+.cnt { margin: 0; font-size: 26px; font-weight: 700; display: flex; justify-content: space-between; }
+.svgtxt { font-family: 'Noto Sans KR', sans-serif; }
+
+/* 직업 분류대 */
+#sort-svg { display: block; width: 100%; height: auto; }
+#sort-svg .card rect.bg { fill: #fff; stroke: #B9B4E0; stroke-width: 3; }
+#sort-svg .card.newjob rect.bg { fill: #FBE3EB; stroke: var(--pink); }
+#sort-svg .card text { font-size: 24px; font-weight: 700; fill: var(--navy); }
+
+/* 도미노 시뮬레이터 */
+.btns { display: grid; gap: 8px; }
+.btns.j { grid-template-columns: repeat(5, 1fr); margin-bottom: 10px; }
+.btns.c { grid-template-columns: repeat(2, 1fr); }
+section.slide button.pick {
+  min-height: 56px; margin: 0; padding: 4px 6px; font: inherit; font-size: 22px; font-weight: 700; line-height: 1.2;
+  border: 3px solid var(--line); border-radius: 14px; background: #fff; color: var(--navy); cursor: pointer;
+}
+section.slide button.pick[aria-pressed="true"] { background: var(--purple); border-color: var(--purple); color: #fff; }
+section.slide button.pick[hidden] { display: none; }
+#sim-svg { display: block; width: 100%; height: auto; }
+#sim-svg .dm { transform-box: fill-box; transform-origin: right bottom; transition: transform .7s cubic-bezier(.5,0,.6,1), fill .7s; }
+#sim-svg text { font-size: 22px; fill: var(--muted); font-weight: 700; }
+.sim-rows { display: flex; flex-direction: column; gap: 6px; margin-top: 4px; }
+.sim-rows > div { display: grid; grid-template-columns: 112px 1fr; gap: 12px; align-items: center; background: #fff; border: 2px solid var(--line); border-radius: 12px; padding: 4px 14px; }
+.sim-rows b { font-size: 22px; color: var(--purple); }
+.sim-rows p { margin: 0; font-size: 24px; line-height: 1.3; }
+.sim-rows > div.last { background: #FBE3EB; border-color: var(--pink); }
+.sim-rows > div.last p { font-family: 'Jua', sans-serif; font-size: 28px; color: var(--deep); }
+</style>
+</head>
+<body data-theme="ppt">
+
+<!-- ───────── 도입 ───────── -->
+<section class="slide cover dark" id="cover" data-title="표지">
+  <div class="cv-card a" aria-hidden="true" data-enter="off"></div>
+  <div class="cv-card b" aria-hidden="true" data-enter="off"><b>미래 변화 카드</b></div>
+  <div class="cv">
+    <p class="tag">진로와 직업 · 1. 변화하는 사회, 변화하는 직업</p>
+    <h1>미래 직업 변화<br>탐색하기</h1>
+    <p class="sub">사회가 바뀌면<br>직업은 어떻게 바뀔까?</p>
+  </div>
+</section>
+
+<section class="slide violet" id="hook" data-sec="도입" data-title="타임머신 발문">
+  <p class="tag">상상해 볼까?</p>
+  <p class="hook-q jua">타임머신을 타고 50년 전 한국에 가서<br>“저는 유튜버가 꿈이에요!”라고 하면<br>사람들은 뭐라고 할까?</p>
+  <div class="short" data-ph="사람들이 할 말을 한 줄로 적어 보자">
+    <p class="ask">50년 전 사람들의 반응을 예상해 보자.</p>
+  </div>
+</section>
+
+<section class="slide" id="signals" data-sec="도입" data-title="손 신호 정하기">
+  <p class="tag">직업 타임머신 퀴즈</p>
+  <h2>손으로 답해 보자</h2>
+  <div class="signals">
+    <div><p class="hand">주먹</p><p class="kind">사라진 직업</p><p class="hint">지금은 거의 없다</p></div>
+    <div><p class="hand">손바닥</p><p class="kind">새로 생긴 직업</p><p class="hint">예전에는 없었다</p></div>
+    <div><p class="hand">손가락 하나</p><p class="kind">모습이 바뀐 직업</p><p class="hint">있지만 하는 일이 달라졌다</p></div>
+  </div>
+  <p class="note">정답보다 “왜?”를 생각하는 것이 더 중요하다.</p>
+</section>
+
+<section class="slide" id="q1" data-sec="도입" data-title="퀴즈 1 버스 안내원">
+  <p class="tag">타임머신 퀴즈 1 / 7</p>
+  <h2 class="job">버스 안내원</h2>
+  <p class="desc">버스에 타서 문을 열고 닫고, 요금을 받던 사람</p>
+  <p class="ask">지금도 있을까? 주먹 · 손바닥 · 손가락 하나</p>
+  <div class="quiz" data-cols="3" data-ai="보기별 풀이">
+    <button class="opt" data-ok data-why="맞다. 사라진 직업이다. 자동문, 요금함과 교통카드, 하차 벨이 생겼다.">사라진 직업</button>
+    <button class="opt" data-why="버스 안내원은 예전에 있던 직업이다.">새로 생긴 직업</button>
+    <button class="opt" data-why="지금 버스에는 안내원이 거의 없다.">모습이 바뀐 직업</button>
+  </div>
+  <p class="step think">생각해 보기: 무엇이 이 사람들의 일을 대신하게 됐을까?</p>
+</section>
+
+<section class="slide" id="q2" data-sec="도입" data-title="퀴즈 2 전화 교환원">
+  <p class="tag">타임머신 퀴즈 2 / 7</p>
+  <h2 class="job">전화 교환원</h2>
+  <p class="desc">전화를 건 사람과 받을 사람의 선을 손으로 연결해 주던 사람</p>
+  <p class="ask">지금도 있을까? 주먹 · 손바닥 · 손가락 하나</p>
+  <div class="quiz" data-cols="3" data-ai="보기별 풀이">
+    <button class="opt" data-ok data-why="맞다. 사라진 직업이다. 자동으로 전화를 연결해 주는 교환 기계가 생겼다.">사라진 직업</button>
+    <button class="opt" data-why="전화 교환원은 예전에 있던 직업이다.">새로 생긴 직업</button>
+    <button class="opt" data-why="지금은 사람이 손으로 전화선을 연결하지 않는다.">모습이 바뀐 직업</button>
+  </div>
+  <p class="step think">생각해 보기: 사람이 하던 일을 기계가 하면 무엇이 좋아질까?</p>
+</section>
+
+<section class="slide" id="q3" data-sec="도입" data-title="퀴즈 3 타자수">
+  <p class="tag">타임머신 퀴즈 3 / 7</p>
+  <h2 class="job">타자수</h2>
+  <p class="desc">손으로 쓴 문서를 타자기로 깨끗하게 쳐 주던 사람</p>
+  <p class="ask">지금도 있을까? 주먹 · 손바닥 · 손가락 하나</p>
+  <div class="quiz" data-cols="3" data-ai="보기별 풀이">
+    <button class="opt" data-ok data-why="맞다. 사라진 직업이다. 컴퓨터가 보급되어 누구나 직접 입력하게 됐다.">사라진 직업</button>
+    <button class="opt" data-why="타자수는 예전에 있던 직업이다.">새로 생긴 직업</button>
+    <button class="opt" data-why="지금은 문서를 대신 쳐 주는 사람을 따로 두지 않는다.">모습이 바뀐 직업</button>
+  </div>
+  <p class="step think">생각해 보기: 지금 우리는 글을 어떻게 쓸까?</p>
+</section>
+
+<section class="slide" id="q4" data-sec="도입" data-title="퀴즈 4 유튜버">
+  <p class="tag">타임머신 퀴즈 4 / 7</p>
+  <h2 class="job">유튜버</h2>
+  <p class="desc">영상을 만들어 인터넷에 올리고 구독자와 소통하는 사람</p>
+  <p class="ask">지금도 있을까? 주먹 · 손바닥 · 손가락 하나</p>
+  <div class="quiz" data-cols="3" data-ai="보기별 풀이">
+    <button class="opt" data-why="유튜버는 지금 활발히 일하는 직업이다.">사라진 직업</button>
+    <button class="opt" data-ok data-why="맞다. 새로 생긴 직업이다. 인터넷, 스마트폰, 영상 공유 사이트가 생겼다.">새로 생긴 직업</button>
+    <button class="opt" data-why="유튜버는 예전에는 없던 직업이다.">모습이 바뀐 직업</button>
+  </div>
+  <p class="step think">생각해 보기: 이 직업이 생기려면 세상에 먼저 무엇이 있어야 했을까?</p>
+</section>
+
+<section class="slide" id="q5" data-sec="도입" data-title="퀴즈 5 드론 조종사">
+  <p class="tag">타임머신 퀴즈 5 / 7</p>
+  <h2 class="job">드론 조종사</h2>
+  <p class="desc">드론을 날려 촬영, 농약 살포, 시설 점검 등을 하는 사람</p>
+  <p class="ask">지금도 있을까? 주먹 · 손바닥 · 손가락 하나</p>
+  <div class="quiz" data-cols="3" data-ai="보기별 풀이">
+    <button class="opt" data-why="드론 조종사는 지금 쓰임이 늘고 있는 직업이다.">사라진 직업</button>
+    <button class="opt" data-ok data-why="맞다. 새로 생긴 직업이다. 드론 기술이 발달하고 값이 싸졌다.">새로 생긴 직업</button>
+    <button class="opt" data-why="드론 조종사는 예전에는 없던 직업이다.">모습이 바뀐 직업</button>
+  </div>
+  <p class="step think">생각해 보기: 드론은 또 어디에 쓰일 수 있을까?</p>
+</section>
+
+<section class="slide" id="q6" data-sec="도입" data-title="퀴즈 6 앱 개발자">
+  <p class="tag">타임머신 퀴즈 6 / 7</p>
+  <h2 class="job">앱 개발자</h2>
+  <p class="desc">스마트폰에서 쓰는 앱을 만드는 사람</p>
+  <p class="ask">지금도 있을까? 주먹 · 손바닥 · 손가락 하나</p>
+  <div class="quiz" data-cols="3" data-ai="보기별 풀이">
+    <button class="opt" data-why="앱 개발자는 지금 많이 필요한 직업이다.">사라진 직업</button>
+    <button class="opt" data-ok data-why="맞다. 새로 생긴 직업이다. 스마트폰이 생기고 모두가 쓰게 됐다.">새로 생긴 직업</button>
+    <button class="opt" data-why="앱 개발자는 스마트폰이 나오기 전에는 없던 직업이다.">모습이 바뀐 직업</button>
+  </div>
+  <p class="step think">생각해 보기: 내 휴대폰에는 앱이 몇 개 있을까?</p>
+</section>
+
+<section class="slide" id="q7" data-sec="도입" data-title="퀴즈 7 은행원">
+  <p class="tag">타임머신 퀴즈 7 / 7</p>
+  <h2 class="job">은행원</h2>
+  <p class="desc">은행에서 일하는 사람</p>
+  <p class="ask">지금도 있을까? 주먹 · 손바닥 · 손가락 하나</p>
+  <div class="quiz" data-cols="3" data-ai="보기별 풀이">
+    <button class="opt" data-why="은행원은 지금도 있는 직업이다.">사라진 직업</button>
+    <button class="opt" data-why="은행원은 예전에도 있던 직업이다.">새로 생긴 직업</button>
+    <button class="opt" data-ok data-why="맞다. 예전에는 창구에서 입금, 출금, 통장 정리를 했다. 지금은 상담과 금융 상품 안내를 한다.">모습이 바뀐 직업</button>
+  </div>
+  <p class="step think">생각해 보기: 모바일 뱅킹이 생기면서 무엇이 달라졌을까?</p>
+</section>
+
+<section class="slide" id="sort" data-sec="도입" data-title="시간이 흐르며 직업은">
+  <h2>시간이 흐르자 일곱 직업은 어떻게 되었을까?</h2>
+  <div class="calc" data-ai="직업 분류대 익스플로라그램">
+    <div class="reveal ex2" data-name="k" data-stops="시작|예전|새 기술|지금">
+      <div class="veil">
+        <svg id="sort-svg" class="svgtxt" viewBox="0 0 700 300" role="img" aria-label="일곱 직업 카드가 시간에 따라 세 칸으로 옮겨 가는 그림">
+          <!-- 머리말: 예전·새 기술 단계 -->
+          <g text-anchor="middle" font-size="24" font-weight="700">
+            <text x="350" y="28" fill="#4B4593" data-attr="opacity: k < 3 ? 1 : 0">그때 있던 직업</text>
+            <text x="594" y="28" fill="#6B6886" data-attr="opacity: k < 3 ? 1 : 0">아직 없던 직업</text>
+            <text x="106" y="28" fill="#C2416A" data-attr="opacity: k == 2 ? 1 : 0">새 기술</text>
+            <text x="106" y="28" fill="#4B4593" data-attr="opacity: k == 3 ? 1 : 0">사라진 직업</text>
+            <text x="350" y="28" fill="#4B4593" data-attr="opacity: k == 3 ? 1 : 0">모습이 바뀐 직업</text>
+            <text x="594" y="28" fill="#C2416A" data-attr="opacity: k == 3 ? 1 : 0">새로 생긴 직업</text>
+          </g>
+          <!-- 새 기술 상자 -->
+          <g data-attr="opacity: k == 2 ? 1 : 0">
+            <rect x="0" y="44" width="212" height="250" rx="14" fill="#FBE3EB" stroke="#F2A9C0" stroke-width="3"/>
+            <g font-size="22" fill="#24223B" text-anchor="middle">
+              <text x="106" y="86">자동문·교통카드</text>
+              <text x="106" y="103">자동 교환 기계</text>
+              <text x="106" y="174">컴퓨터</text>
+              <text x="106" y="218">모바일 뱅킹</text>
+              <text x="106" y="262">인터넷·스마트폰·드론</text>
+            </g>
+          </g>
+          <!-- 직업 카드 -->
+          <g class="card" data-attr="transform: 'translate(' + (k < 3 ? 244 : 0) + ' 50)'">
+            <rect class="bg" width="212" height="54" rx="12"/><text x="106" y="36" text-anchor="middle">버스 안내원</text>
+            <line x1="14" y1="27" x2="198" y2="27" stroke="#C2416A" stroke-width="4" data-attr="opacity: k == 3 ? 1 : 0"/>
+          </g>
+          <g class="card" data-attr="transform: 'translate(' + (k < 3 ? 244 : 0) + ' 114)'">
+            <rect class="bg" width="212" height="54" rx="12"/><text x="106" y="36" text-anchor="middle">전화 교환원</text>
+            <line x1="14" y1="27" x2="198" y2="27" stroke="#C2416A" stroke-width="4" data-attr="opacity: k == 3 ? 1 : 0"/>
+          </g>
+          <g class="card" data-attr="transform: 'translate(' + (k < 3 ? 244 : 0) + ' 178)'">
+            <rect class="bg" width="212" height="54" rx="12"/><text x="106" y="36" text-anchor="middle">타자수</text>
+            <line x1="14" y1="27" x2="198" y2="27" stroke="#C2416A" stroke-width="4" data-attr="opacity: k == 3 ? 1 : 0"/>
+          </g>
+          <g class="card" data-attr="transform: 'translate(244 ' + (k < 3 ? 242 : 50) + ')'">
+            <rect class="bg" width="212" height="54" rx="12"/><text x="106" y="36" text-anchor="middle">은행원</text>
+          </g>
+          <g class="card newjob" data-attr="opacity: k < 3 ? 0.3 : 1; transform: 'translate(488 ' + (k < 3 ? 70 : 50) + ')'">
+            <rect class="bg" width="212" height="54" rx="12"/><text x="106" y="36" text-anchor="middle">유튜버</text>
+          </g>
+          <g class="card newjob" data-attr="opacity: k < 3 ? 0.3 : 1; transform: 'translate(488 ' + (k < 3 ? 134 : 114) + ')'">
+            <rect class="bg" width="212" height="54" rx="12"/><text x="106" y="36" text-anchor="middle">드론 조종사</text>
+          </g>
+          <g class="card newjob" data-attr="opacity: k < 3 ? 0.3 : 1; transform: 'translate(488 ' + (k < 3 ? 198 : 178) + ')'">
+            <rect class="bg" width="212" height="54" rx="12"/><text x="106" y="36" text-anchor="middle">앱 개발자</text>
+          </g>
+        </svg>
+      </div>
+      <div class="right">
+        <div class="ch-stops"></div>
+        <p class="res" data-only="0">막대를 밀거나 →를 눌러<br>시간을 흘려 보자.</p>
+        <p class="res" data-only="1">일하던 직업은 4개다.<br>오른쪽 셋은 아직 없었다.</p>
+        <p class="res" data-only="2">새 기술이 나타났다.<br>누구의 일을 대신할까?</p>
+        <div data-only="3">
+          <p class="cnt"><span>사라진 직업</span><span><output data-expr="k == 3 ? 3 : 0"></output>개</span></p>
+          <div class="bar" data-value="k == 3 ? 3 : 0" data-max="4"></div>
+          <p class="cnt"><span>모습이 바뀐 직업</span><span><output data-expr="k == 3 ? 1 : 0"></output>개</span></p>
+          <div class="bar" data-value="k == 3 ? 1 : 0" data-max="4"></div>
+          <p class="cnt"><span>새로 생긴 직업</span><span><output data-expr="k == 3 ? 3 : 0"></output>개</span></p>
+          <div class="bar" data-value="k == 3 ? 3 : 0" data-max="4" style="--bar-c:#C2416A"></div>
+          <p class="res" style="margin-top:8px">남아 있는 은행원도<br>하는 일이 바뀌었다.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="three" data-sec="도입" data-title="직업 변화의 세 갈래">
+  <p class="tag">퀴즈 정리</p>
+  <h2>사회가 변하면 직업은 세 가지로 변한다</h2>
+  <div class="three">
+    <div><p class="h">1. 사라진다</p><p>버스 안내원, 전화 교환원, 타자수</p></div>
+    <div><p class="h">2. 바뀐다</p><p>은행원</p></div>
+    <div><p class="h">3. 새로 생긴다</p><p>유튜버, 드론 조종사, 앱 개발자</p></div>
+  </div>
+  <p class="bridge step">그럼 앞으로 사회가 또 바뀌면,<br>내가 꿈꾸는 직업은 어떻게 될까?</p>
+</section>
+
+<!-- ───────── 전개 ───────── -->
+<section class="slide dark" id="domino" data-sec="전개" data-title="변화 도미노">
+  <p class="tag">활동 1 · 변화 도미노</p>
+  <h2 class="dom-big">도미노 하나가 넘어지면,<br>다음 것도 넘어진다</h2>
+  <p class="sub">사회 변화 하나가 생기면 그다음 일이 생긴다.<br>그 일이 또 직업을 바꾼다.</p>
+  <div class="dom-row" aria-hidden="true" data-enter="off">
+    <i data-enter="off" style="background:#6C66B5"></i>
+    <i data-enter="off" style="background:#7E78C4;transform:rotate(12deg)"></i>
+    <i data-enter="off" style="background:#8F8AD6;transform:rotate(28deg)"></i>
+    <i data-enter="off" style="background:#CFCCE8;transform:rotate(48deg)"></i>
+    <i data-enter="off" style="background:#F2A9C0;transform:rotate(70deg)"></i>
+  </div>
+</section>
+
+<section class="slide" id="domino-steps" data-sec="전개" data-title="그러면을 세 번">
+  <p class="tag">변화 도미노</p>
+  <h2>“그러면?”을 세 번 물어보자</h2>
+  <div class="chain">
+    <div class="bx first"><b>카드</b><p>내가 뽑은 미래 변화 카드</p></div>
+    <p class="ar">→</p>
+    <div class="bx"><b>그러면 1.</b><p>사회에 어떤 일이 생길까?</p></div>
+    <p class="ar">→</p>
+    <div class="bx"><b>그러면 2.</b><p>사람들에게 무엇이 필요해질까?</p></div>
+    <p class="ar">→</p>
+    <div class="bx"><b>그러면 3.</b><p>내 관심 직업은 어떻게 바뀔까?</p></div>
+    <p class="ar">→</p>
+    <div class="bx last"><b>새 직업</b><p>새로 생길 직업 이름 짓기</p></div>
+  </div>
+  <p class="note">한 번에 한 칸만 생각하면 된다. 정답은 없다.</p>
+</section>
+
+<section class="slide" id="demo" data-sec="전개" data-title="함께 해 보기 요리사">
+  <p class="tag">함께 해 보자 · 관심 직업: 요리사</p>
+  <h2>고령화 카드를 뽑았다면?</h2>
+  <div class="chain">
+    <div class="bx first step"><b>카드</b><p>고령화</p></div>
+    <p class="ar step" data-step="2">→</p>
+    <div class="bx step" data-step="2"><b>그러면 1.</b><p>혼자 사는 할머니, 할아버지가 많아진다</p></div>
+    <p class="ar step" data-step="3">→</p>
+    <div class="bx step" data-step="3"><b>그러면 2.</b><p>매일 건강한 식사를 챙겨 줄 사람이 필요해진다</p></div>
+    <p class="ar step" data-step="4">→</p>
+    <div class="bx step" data-step="4"><b>그러면 3.</b><p>요리사는 씹기 쉽고 건강에 맞는 음식을 만들어 배달한다</p></div>
+    <p class="ar step" data-step="5">→</p>
+    <div class="bx last step" data-step="5"><b>새 직업</b><p>실버 건강 도시락 셰프</p></div>
+  </div>
+</section>
+
+<section class="slide" id="sim" data-sec="전개" data-title="카드를 바꾸면 새 직업은">
+  <h2>같은 직업, 다른 카드라면 새 직업도 바뀔까?</h2>
+  <div class="reveal ex2" id="sim-r" data-stops="시작|카드|1|2|3|새 직업" data-ai="변화 도미노 익스플로라그램" data-activity>
+    <div class="left">
+    <div class="btns j" id="sim-jobs" role="group" aria-label="관심 직업"></div>
+    <div class="veil">
+      <svg id="sim-svg" class="svgtxt" viewBox="0 0 660 104" role="img" aria-label="다섯 개의 도미노가 단계마다 하나씩 넘어지는 그림">
+        <line x1="0" y1="82" x2="660" y2="82" stroke="#DCD9EC" stroke-width="4"/>
+        <rect class="dm" id="dm-0" x="40" y="12" width="30" height="70" rx="6"/>
+        <rect class="dm" id="dm-1" x="170" y="12" width="30" height="70" rx="6"/>
+        <rect class="dm" id="dm-2" x="300" y="12" width="30" height="70" rx="6"/>
+        <rect class="dm" id="dm-3" x="430" y="12" width="30" height="70" rx="6"/>
+        <rect class="dm" id="dm-4" x="560" y="12" width="30" height="70" rx="6"/>
+        <g text-anchor="middle">
+          <text x="57" y="103">카드</text><text x="187" y="103">1</text><text x="317" y="103">2</text><text x="447" y="103">3</text><text x="577" y="103">새 직업</text>
+        </g>
+      </svg>
+      <div class="sim-rows">
+        <div data-at="1"><b>카드</b><p id="sim-t0"></p></div>
+        <div data-at="2"><b>그러면 1.</b><p id="sim-t1"></p></div>
+        <div data-at="3"><b>그러면 2.</b><p id="sim-t2"></p></div>
+        <div data-at="4"><b>그러면 3.</b><p id="sim-t3"></p></div>
+        <div data-at="5" class="last"><b>새 직업</b><p id="sim-t4"></p></div>
+      </div>
+    </div>
+    </div>
+    <div class="right">
+      <p class="lab">미래 변화 카드</p>
+      <div class="btns c" id="sim-cards"></div>
+      <div class="ch-stops"></div>
+      <p class="res" id="sim-out"></p>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="activity" data-sec="전개" data-title="나만의 변화 도미노">
+  <p class="tag">이제 내 차례 · 12분</p>
+  <h2>나만의 변화 도미노 만들기</h2>
+  <div class="rows">
+    <div><p class="n">1</p><p>활동지 맨 위에 관심 직업을 쓴다.</p></div>
+    <div><p class="n">2</p><p>카드를 뒤집어 섞고 한 장을 뽑는다.</p></div>
+    <div><p class="n">3</p><p>도미노 칸을 위에서부터 한 칸씩 채운다.</p></div>
+    <div><p class="n plus">+</p><p>빨리 끝났다면? 두 번째 카드에 도전!</p></div>
+  </div>
+  <div class="timer below" data-sec="720" data-label="변화 도미노"></div>
+</section>
+
+<section class="slide" id="helper-1" data-sec="전개" data-title="막혔을 때 질문 1">
+  <h2>막혔다면? 내 카드의 질문을 보자 (1)</h2>
+  <div class="cards6">
+    <div><p class="c">인공 지능</p><p class="q2">AI가 사람 대신 할 수 있게 되는 일은 뭘까?</p></div>
+    <div><p class="c">저출생</p><p class="q2">아이가 줄면 학교, 가게, 동네는 어떻게 될까?</p></div>
+    <div><p class="c">다문화</p><p class="q2">다른 나라에서 온 이웃이 많아지면 무엇이 필요할까?</p></div>
+    <div><p class="c">기후 변화</p><p class="q2">여름이 더 덥고 비가 더 많이 오면 무엇이 어려워질까?</p></div>
+    <div><p class="c">여가</p><p class="q2">쉬는 시간이 늘면 사람들은 무엇을 하고 싶어 할까?</p></div>
+    <div><p class="c">의료 기술 발달</p><p class="q2">병을 더 잘 고치게 되면 생활은 어떻게 바뀔까?</p></div>
+  </div>
+</section>
+
+<section class="slide" id="helper-2" data-sec="전개" data-title="막혔을 때 질문 2">
+  <h2>막혔다면? 내 카드의 질문을 보자 (2)</h2>
+  <div class="cards6">
+    <div><p class="c">세계화</p><p class="q2">다른 나라와 물건, 사람이 더 많이 오가면 무엇이 생길까?</p></div>
+    <div><p class="c">관계</p><p class="q2">사람마다 다른 취향을 존중하게 되면 무엇이 달라질까?</p></div>
+    <div><p class="c">우주 과학</p><p class="q2">사람이 우주에 자주 가게 되면 무엇이 필요할까?</p></div>
+    <div><p class="c">로봇</p><p class="q2">로봇이 사람 대신 일하면 사람은 무엇을 할까?</p></div>
+    <div><p class="c">메타버스(가상 세계)</p><p class="q2">가상 세계에서 친구를 만나고 일하면 무엇이 필요할까?</p></div>
+    <div><p class="c">고령화</p><p class="q2">할머니, 할아버지가 많아지면 동네에 무엇이 필요할까?</p></div>
+  </div>
+</section>
+
+<section class="slide" id="ex-cook" data-sec="직업별 예시" data-title="예시 1 요리사">
+  <h2>도미노 예시 1 · 요리사</h2>
+  <table class="compare ex">
+    <thead><tr><th style="width:13%">카드</th><th style="width:22%">그러면 1.</th><th style="width:22%">그러면 2.</th><th style="width:24%">그러면 3.</th><th style="width:19%">새 직업</th></tr></thead>
+    <tbody>
+      <tr><th>인공 지능</th><td>AI가 입맛과 건강 정보를 분석한다</td><td>사람마다 딱 맞는 메뉴가 필요해진다</td><td>한 사람만을 위한 요리를 만든다</td><td>AI 맞춤 식단 셰프</td></tr>
+      <tr><th>기후 변화</th><td>기르기 어려워지는 농작물이 생긴다</td><td>새로운 식재료가 필요해진다</td><td>콩고기 같은 대체 식품으로 요리한다</td><td>대체 식품 셰프</td></tr>
+      <tr><th>로봇</th><td>조리 로봇이 볶고 튀기는 일을 한다</td><td>로봇이 따라 할 레시피가 필요해진다</td><td>레시피를 개발하고 로봇을 관리한다</td><td>조리 로봇 레시피 개발자</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="slide" id="ex-police" data-sec="직업별 예시" data-title="예시 2 경찰관">
+  <h2>도미노 예시 2 · 경찰관</h2>
+  <table class="compare ex">
+    <thead><tr><th style="width:13%">카드</th><th style="width:22%">그러면 1.</th><th style="width:22%">그러면 2.</th><th style="width:24%">그러면 3.</th><th style="width:19%">새 직업</th></tr></thead>
+    <tbody>
+      <tr><th>인공 지능</th><td>AI가 CCTV와 사건 기록을 분석한다</td><td>범죄를 미리 막는 방법이 필요해진다</td><td>AI가 알려 준 위험한 곳을 먼저 순찰한다</td><td>AI 범죄 예측 분석관</td></tr>
+      <tr><th>관계</th><td>온라인으로 사람을 만나는 일이 많아진다</td><td>온라인 괴롭힘과 사기를 막아야 한다</td><td>인터넷에서 일어나는 범죄를 수사한다</td><td>사이버 폭력 수사관</td></tr>
+      <tr><th>고령화</th><td>할머니, 할아버지가 많아진다</td><td>길을 잃거나 전화 사기를 당하는 어르신을 도와야 한다</td><td>어르신 찾기와 사기 예방 교육을 한다</td><td>어르신 안전 전담 경찰관</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="slide" id="ex-kinder" data-sec="직업별 예시" data-title="예시 3 유치원 교사">
+  <h2>도미노 예시 3 · 유치원 교사</h2>
+  <table class="compare ex">
+    <thead><tr><th style="width:13%">카드</th><th style="width:22%">그러면 1.</th><th style="width:22%">그러면 2.</th><th style="width:24%">그러면 3.</th><th style="width:19%">새 직업</th></tr></thead>
+    <tbody>
+      <tr><th>다문화</th><td>다문화 가정 아이가 많아진다</td><td>여러 언어와 문화를 이해하는 교육이 필요해진다</td><td>두 가지 언어로 이야기를 들려준다</td><td>이중 언어 유아 교사</td></tr>
+      <tr><th>기후 변화</th><td>미세 먼지와 폭염으로 바깥 놀이가 어려워진다</td><td>안전하게 자연을 배우는 방법이 필요해진다</td><td>실내 정원과 환경 놀이로 자연을 가르친다</td><td>유아 환경 교육 교사</td></tr>
+      <tr><th>고령화</th><td>조부모가 손주를 돌보는 집이 많아진다</td><td>조부모와 손주가 함께 즐길 활동이 필요해진다</td><td>어르신과 아이가 함께하는 수업을 연다</td><td>세대 공감 놀이 교사</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="slide" id="ex-chip" data-sec="직업별 예시" data-title="예시 4 반도체 엔지니어">
+  <h2>도미노 예시 4 · 반도체 엔지니어</h2>
+  <table class="compare ex">
+    <thead><tr><th style="width:13%">카드</th><th style="width:22%">그러면 1.</th><th style="width:22%">그러면 2.</th><th style="width:24%">그러면 3.</th><th style="width:19%">새 직업</th></tr></thead>
+    <tbody>
+      <tr><th>인공 지능</th><td>AI를 쓰는 곳이 크게 늘어난다</td><td>빠르고 전기를 적게 쓰는 AI용 칩이 필요해진다</td><td>AI 전용 칩을 설계한다</td><td>AI 반도체 설계자</td></tr>
+      <tr><th>의료 기술 발달</th><td>몸에 붙이거나 넣는 의료 기기가 늘어난다</td><td>아주 작고 안전한 의료용 반도체가 필요해진다</td><td>몸속에서 건강을 재는 초소형 칩을 만든다</td><td>의료용 반도체 개발자</td></tr>
+      <tr><th>우주 과학</th><td>인공위성과 우주선이 많아진다</td><td>우주의 방사선과 추위를 견디는 반도체가 필요해진다</td><td>우주용 칩을 설계하고 시험한다</td><td>우주 반도체 엔지니어</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="slide" id="ex-animal" data-sec="직업별 예시" data-title="예시 5 동물 훈련사">
+  <h2>도미노 예시 5 · 동물 훈련사</h2>
+  <table class="compare ex">
+    <thead><tr><th style="width:13%">카드</th><th style="width:22%">그러면 1.</th><th style="width:22%">그러면 2.</th><th style="width:24%">그러면 3.</th><th style="width:19%">새 직업</th></tr></thead>
+    <tbody>
+      <tr><th>기후 변화</th><td>폭염, 홍수 같은 재난이 자주 일어난다</td><td>재난 현장에서 사람을 찾을 방법이 필요해진다</td><td>구조견을 훈련하고 재난 대피 훈련을 한다</td><td>기후 재난 구조견 훈련사</td></tr>
+      <tr><th>관계</th><td>동물도 존중해야 할 생명이라는 생각이 커진다</td><td>스트레스를 주지 않는 훈련 방법이 필요해진다</td><td>칭찬과 놀이 중심으로 훈련한다</td><td>동물 복지 훈련사</td></tr>
+      <tr><th>고령화</th><td>혼자 사는 할머니, 할아버지가 많아진다</td><td>외로움을 덜어 주고 생활을 도울 동물이 필요해진다</td><td>어르신을 돕는 도우미견을 훈련한다</td><td>어르신 도우미견 훈련사</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ───────── 정리 ───────── -->
+<section class="slide dark" id="ad" data-sec="정리" data-title="2045년 구인 광고">
+  <p class="tag">활동 2 · 7분</p>
+  <h2>지금은 2045년! 새 직업의 구인 광고를 만들자</h2>
+  <div class="grid2 rows">
+    <div><p class="n">1</p><p>직업 이름</p></div>
+    <div><p class="n">2</p><p>이런 일을 해요</p></div>
+    <div><p class="n">3</p><p>이런 사람을 찾아요 (2가지)</p></div>
+    <div><p class="n">4</p><p>일하는 곳</p></div>
+    <div><p class="n">5</p><p>한 줄 홍보 문구</p></div>
+    <p class="goal">목표: 친구가 “나도 지원하고 싶다!” 하게 만들기</p>
+  </div>
+  <div class="timer below" data-sec="420" data-label="구인 광고"></div>
+</section>
+
+<section class="slide" id="ad-example" data-sec="정리" data-title="구인 광고 예시">
+  <div class="ad-wrap">
+    <div>
+      <p class="tag">구인 광고 예시</p>
+      <h2>시범 직업으로<br>만든 광고</h2>
+      <p class="ad-chain">혼자 사는 어르신이 늘었다.<br>건강한 식사가 필요해졌다.<br>그래서 씹기 쉬운 도시락을 배달한다.</p>
+    </div>
+    <div class="ad">
+      <div class="ad-top"><p>2045년 구인 광고</p><span>지금 모집 중</span></div>
+      <div class="ad-body">
+        <p class="ttl">실버 건강 도시락 셰프</p>
+        <p><b>이런 일을 해요</b><br>어르신의 건강 상태에 맞춰 씹기 쉽고 맛있는 도시락을 만들어 배달해요.</p>
+        <p><b>이런 사람을 찾아요</b><br>요리를 좋아하는 사람, 어르신의 이야기를 잘 들어 주는 사람</p>
+        <p><b>일하는 곳</b><br>동네 도시락 공방, 어르신 댁 방문</p>
+        <p class="slogan">“한 끼로 하루를 지켜 드리는 요리사가 되어 보세요!”</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="slide" id="vote" data-sec="정리" data-title="가장 지원하고 싶은 회사">
+  <h2>가장 지원하고 싶은 회사는?</h2>
+  <div class="rows">
+    <div><p class="n">1</p><p>활동지를 책상 위에 펼쳐 둔다.</p></div>
+    <div><p class="n">2</p><p>교실을 돌며 친구들의 광고를 읽는다.</p></div>
+    <div><p class="n">3</p><p>가장 지원하고 싶은 광고 한 곳에 스티커를 붙인다.<br>내 광고에는 붙일 수 없다.</p></div>
+    <div><p class="n">4</p><p>표를 가장 많이 받은 광고는 주인이 소개한다.</p></div>
+  </div>
+  <div class="timer below" data-sec="240" data-label="서로 보기"></div>
+</section>
+
+<section class="slide dark" id="wrap" data-sec="정리" data-title="마지막 질문">
+  <p class="tag">마지막 질문</p>
+  <h2 class="wrap-q">사회가 변하면,<br>직업은 어떻게 변할까?</h2>
+  <div class="two">
+    <p class="sub">오늘 만든 직업들은 지금은 없다.<br>하지만 정말 생길 수도 있다.</p>
+    <div class="side"><div class="picker" data-range="1-30"></div></div>
+  </div>
+</section>
+
+<section class="slide" id="summary" data-sec="정리" data-title="오늘의 정리">
+  <p class="tag">오늘의 정리</p>
+  <h2>이것만은 기억하자</h2>
+  <div class="rows">
+    <div class="step"><p class="n">1</p><p>사회가 변하면 직업은 사라지기도, 바뀌기도, 새로 생기기도 한다.</p></div>
+    <div class="step"><p class="n">2</p><p>직업의 변화는 사람들의 필요가 바뀌면서 도미노처럼 차례로 일어난다.</p></div>
+    <div class="step"><p class="n">3</p><p>미래 사회의 변화를 살펴보면, 내 진로를 미리 준비할 수 있다.</p></div>
+  </div>
+</section>
+
+<section class="slide dark" id="homework" data-sec="정리" data-title="가족 인터뷰 과제">
+  <p class="tag">다음 시간까지 · 가족 인터뷰</p>
+  <h2>가족 한 분께 여쭤보고 적어 오자</h2>
+  <div class="rows">
+    <div><p class="n">1</p><p>중학생 때 인기 있던 직업은 무엇이었나요?</p></div>
+    <div><p class="n">2</p><p>그때는 있었지만 지금은 거의 없어진 직업이 있나요?</p></div>
+    <div><p class="n">3</p><p>하시는 일은 예전과 비교해 무엇이 달라졌나요?</p></div>
+  </div>
+</section>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  /* 변화 도미노 시뮬레이터: 원본 시범과 예시 표의 칸을 그대로 쓴다 */
+  const DATA = {
+    '요리사': [
+      ['고령화', '혼자 사는 할머니, 할아버지가 많아진다', '매일 건강한 식사를 챙겨 줄 사람이 필요해진다', '씹기 쉽고 건강에 맞는 음식을 만들어 배달한다', '실버 건강 도시락 셰프'],
+      ['인공 지능', 'AI가 입맛과 건강 정보를 분석한다', '사람마다 딱 맞는 메뉴가 필요해진다', '한 사람만을 위한 요리를 만든다', 'AI 맞춤 식단 셰프'],
+      ['기후 변화', '기르기 어려워지는 농작물이 생긴다', '새로운 식재료가 필요해진다', '콩고기 같은 대체 식품으로 요리한다', '대체 식품 셰프'],
+      ['로봇', '조리 로봇이 볶고 튀기는 일을 한다', '로봇이 따라 할 레시피가 필요해진다', '레시피를 개발하고 로봇을 관리한다', '조리 로봇 레시피 개발자']],
+    '경찰관': [
+      ['인공 지능', 'AI가 CCTV와 사건 기록을 분석한다', '범죄를 미리 막는 방법이 필요해진다', 'AI가 알려 준 위험한 곳을 먼저 순찰한다', 'AI 범죄 예측 분석관'],
+      ['관계', '온라인으로 사람을 만나는 일이 많아진다', '온라인 괴롭힘과 사기를 막아야 한다', '인터넷에서 일어나는 범죄를 수사한다', '사이버 폭력 수사관'],
+      ['고령화', '할머니, 할아버지가 많아진다', '길을 잃거나 전화 사기를 당하는 어르신을 도와야 한다', '어르신 찾기와 사기 예방 교육을 한다', '어르신 안전 전담 경찰관']],
+    '유치원 교사': [
+      ['다문화', '다문화 가정 아이가 많아진다', '여러 언어와 문화를 이해하는 교육이 필요해진다', '두 가지 언어로 이야기를 들려준다', '이중 언어 유아 교사'],
+      ['기후 변화', '미세 먼지와 폭염으로 바깥 놀이가 어려워진다', '안전하게 자연을 배우는 방법이 필요해진다', '실내 정원과 환경 놀이로 자연을 가르친다', '유아 환경 교육 교사'],
+      ['고령화', '조부모가 손주를 돌보는 집이 많아진다', '조부모와 손주가 함께 즐길 활동이 필요해진다', '어르신과 아이가 함께하는 수업을 연다', '세대 공감 놀이 교사']],
+    '반도체 엔지니어': [
+      ['인공 지능', 'AI를 쓰는 곳이 크게 늘어난다', '빠르고 전기를 적게 쓰는 AI용 칩이 필요해진다', 'AI 전용 칩을 설계한다', 'AI 반도체 설계자'],
+      ['의료 기술 발달', '몸에 붙이거나 넣는 의료 기기가 늘어난다', '아주 작고 안전한 의료용 반도체가 필요해진다', '몸속에서 건강을 재는 초소형 칩을 만든다', '의료용 반도체 개발자'],
+      ['우주 과학', '인공위성과 우주선이 많아진다', '우주의 방사선과 추위를 견디는 반도체가 필요해진다', '우주용 칩을 설계하고 시험한다', '우주 반도체 엔지니어']],
+    '동물 훈련사': [
+      ['기후 변화', '폭염, 홍수 같은 재난이 자주 일어난다', '재난 현장에서 사람을 찾을 방법이 필요해진다', '구조견을 훈련하고 재난 대피 훈련을 한다', '기후 재난 구조견 훈련사'],
+      ['관계', '동물도 존중해야 할 생명이라는 생각이 커진다', '스트레스를 주지 않는 훈련 방법이 필요해진다', '칭찬과 놀이 중심으로 훈련한다', '동물 복지 훈련사'],
+      ['고령화', '혼자 사는 할머니, 할아버지가 많아진다', '외로움을 덜어 주고 생활을 도울 동물이 필요해진다', '어르신을 돕는 도우미견을 훈련한다', '어르신 도우미견 훈련사']]
+  };
+  const SHORT = { '요리사': '요리사', '경찰관': '경찰관', '유치원 교사': '유치원 교사', '반도체 엔지니어': '반도체', '동물 훈련사': '동물 훈련사' };
+  const COLORS = ['#6C66B5', '#7E78C4', '#8F8AD6', '#A9A4E0', '#F2A9C0'];
+  const STAND = '#DCD9EC';
+  const $ = (s) => document.querySelector(s);
+  const reveal = $('#sim-r');
+  if (!reveal) return;
+  const jobBox = $('#sim-jobs'), cardBox = $('#sim-cards');
+  const state = { job: '요리사', card: 0, tried: {} };
+  const timers = [];
+
+  const jobBtns = Object.keys(DATA).map((name) => {
+    const b = document.createElement('button');
+    b.type = 'button'; b.className = 'pick'; b.textContent = SHORT[name];
+    b.setAttribute('aria-label', name);
+    b.setAttribute('aria-pressed', String(name === state.job));
+    b.addEventListener('click', () => { state.job = name; state.card = 0; render(true); });
+    jobBox.appendChild(b);
+    return [name, b];
+  });
+  const cardBtns = [0, 1, 2, 3].map((i) => {
+    const b = document.createElement('button');
+    b.type = 'button'; b.className = 'pick';
+    b.addEventListener('click', () => { state.card = i; render(true); });
+    cardBox.appendChild(b);
+    return b;
+  });
+
+  const stage = () => +(reveal.getAttribute('data-pos') || 0);
+  const still = () => document.documentElement.classList.contains('ch-motion-off');
+
+  function drawDominoes(k, replay) {
+    timers.splice(0).forEach(clearTimeout);
+    for (let i = 0; i < 5; i++) {
+      const d = $('#dm-' + i);
+      const fall = () => { d.style.transform = 'rotate(80deg)'; d.style.fill = COLORS[i]; };
+      const stand = () => { d.style.transform = 'rotate(0deg)'; d.style.fill = STAND; };
+      if (i >= k) { stand(); continue; }
+      if (replay && !still()) { stand(); timers.push(setTimeout(fall, 450 + i * 180)); }
+      else fall();
+    }
+  }
+
+  function render(replay) {
+    const k = stage();
+    const rows = DATA[state.job];
+    const row = rows[state.card];
+    jobBtns.forEach(([n, b]) => b.setAttribute('aria-pressed', String(n === state.job)));
+    cardBtns.forEach((b, i) => {
+      b.hidden = i >= rows.length;
+      if (i < rows.length) b.textContent = rows[i][0];
+      b.setAttribute('aria-pressed', String(i === state.card));
+    });
+    for (let i = 0; i < 5; i++) $('#sim-t' + i).textContent = row[i];
+    if (k >= 5) {
+      (state.tried[state.job] = state.tried[state.job] || new Set()).add(row[4]);
+    }
+    const n = state.tried[state.job] ? state.tried[state.job].size : 0;
+    const out = $('#sim-out');
+    if (k === 0) out.textContent = '직업과 카드를 고르고 막대를 밀어 보자.';
+    else if (k < 5) out.textContent = '넘어진 도미노 ' + k + ' / 5';
+    else if (n < 2) out.textContent = '새 직업 ' + n + '개. 카드를 바꿔 보자.';
+    else out.textContent = '같은 ' + state.job + '에서 새 직업 ' + n + '개가 나왔다.';
+    drawDominoes(k, replay);
+  }
+
+  let last = stage();
+  new MutationObserver(() => {
+    const k = stage();
+    if (k === last) return;
+    last = k;
+    render(false);
+  }).observe(reveal, { attributes: true, attributeFilter: ['data-pos'] });
+  render(false);
+});
+</script>
+</body>
+</html>
