@@ -1,0 +1,449 @@
+<!doctype html>
+<html lang="ko" data-deck="career-tscore-percentile">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>T점수와 백분위 쉽게 이해하기</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/N-lifescience/resonance@2/engine/exploragram.css">
+<script defer src="https://cdn.jsdelivr.net/gh/N-lifescience/resonance@2/engine/exploragram.js"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;700&display=swap">
+<style>
+body[data-theme="ppt"] { --accent: #B4561A; --tab: #1F2A44; --tab-ink: #FFFFFF; --table-head: #1F2A44; --table-side: #F6E3D3; }
+body[data-theme="ppt"] { --navy: #1F2A44; --orange: #B4561A; --orange-soft: #F6E3D3; --peach: #F6D9C2; --blue: #2F6FB0; --blue-soft: #C9DAEC; --cream: #FBF8F1; --ink2: #3D4A63; --gray: #5F6773; --green: #2E6B3A; --green-soft: #DCEBDD; }
+
+/* ── 슬라이드 얼굴: 크림 바탕, 둥근 손글씨 제목 ── */
+body[data-theme="ppt"] section.slide { background: var(--cream); color: var(--navy); font-family: "Noto Sans KR", "Malgun Gothic", sans-serif; }
+body[data-theme="ppt"] section.slide.alt { background: #EEF3F8; }
+body[data-theme="ppt"] section.slide > h2 { font-family: "Jua", "Noto Sans KR", sans-serif; font-weight: 400; color: var(--navy); }
+.jua { font-family: "Jua", "Noto Sans KR", sans-serif; font-weight: 400; }
+.hi { color: var(--orange); }
+.note { margin: 0; font-size: 22px; line-height: 1.4; color: var(--gray); }
+
+/* 표지와 정리(어두운 장) */
+body[data-theme="ppt"] section.slide.dark { background: var(--navy); color: #FBF8F1; }
+body[data-theme="ppt"] section.slide.dark::before { display: none; }
+.cv { display: grid; grid-template-columns: 1fr 420px; gap: 30px; align-items: center; height: 100%; }
+.cv p, .cv h1 { margin: 0; color: #FBF8F1; }
+.cv .cv-k { font-size: 28px; font-weight: 700; color: #F2A766; }
+.cv h1 { margin: 22px 0 24px; font-family: "Jua", sans-serif; font-weight: 400; font-size: 76px; line-height: 1.15; }
+.cv .cv-s { font-family: "Jua", sans-serif; font-size: 42px; color: #F2A766; }
+
+/* 카드 */
+.cards { display: grid; gap: 28px; margin-top: 8px; }
+.cards.two { grid-template-columns: 1fr 1fr; }
+.cards.three { grid-template-columns: 1fr 1fr 1fr; }
+.card { padding: 22px 26px; border: 2px solid #E3DED3; border-radius: 20px; background: #FFFFFF; }
+.card.warm { border: 0; background: var(--orange-soft); }
+.card.good { border-color: #9CC3A0; background: var(--green-soft); }
+.card h3 { margin: 0 0 12px; font-family: "Jua", sans-serif; font-weight: 400; font-size: 34px; }
+.card p { margin: 0 0 8px; font-size: 28px; line-height: 1.45; }
+.card ul { margin: 0; padding-left: 30px; font-size: 28px; line-height: 1.6; color: var(--ink2); }
+.card .goal { font-size: 32px; font-weight: 700; line-height: 1.5; color: var(--navy); }
+.card .big80 { font-family: "Jua", sans-serif; font-size: 72px; line-height: 1.1; margin: 4px 0 10px !important; }
+.lab { display: inline-block; padding: 2px 14px; border-radius: 999px; font-size: 22px; font-weight: 700; }
+.lab.bad { background: #F8E0D2; color: #8A3D0F; }
+.lab.ok { background: #FFFFFF; color: var(--green); }
+.ask-q { margin: 0 0 6px; font-size: 22px; color: var(--gray); }
+.card .ans { font-family: "Jua", sans-serif; font-size: 34px; line-height: 1.3; color: var(--orange); margin: 4px 0 10px !important; }
+.punch { margin: 26px 0 0; font-family: "Jua", sans-serif; font-size: 36px; line-height: 1.35; }
+
+/* 익스플로라그램 공통: 그림 왼쪽, 손잡이 오른쪽 */
+.dh { display: grid; grid-template-columns: 1fr 400px; gap: 20px 36px; align-items: start; }
+.dh svg { display: block; width: 100%; height: auto; }
+.dh .plot { margin: 0; }
+.dh-ctrl { display: flex; flex-direction: column; gap: 6px; }
+.dh-ctrl > p { margin: 0; font-size: 26px; font-weight: 700; line-height: 1.4; }
+.dh-ctrl output { color: var(--orange); }
+.dh input[type=range] { width: 100%; height: 56px; margin: 0; accent-color: var(--orange); }
+.eq { margin: 6px 0 4px !important; padding: 10px 16px; border-radius: 12px; background: var(--orange-soft); font-size: 32px !important; text-align: center; color: #8A3D0F; }
+.eq output { color: #8A3D0F !important; }
+.say { font-size: 24px !important; line-height: 1.45 !important; color: var(--navy); }
+.legend { display: flex; gap: 24px; margin: 10px 0 0; font-size: 24px; font-weight: 700; }
+.legend span { display: inline-flex; align-items: center; gap: 8px; }
+.legend i { display: inline-block; width: 26px; height: 26px; border-radius: 6px; }
+
+/* 정리 */
+.sum { margin: 34px 0 0; display: grid; grid-template-columns: 200px 1fr; gap: 26px 28px; align-items: baseline; }
+.sum dt { font-family: "Jua", sans-serif; font-size: 40px; color: #F2A766; }
+.sum dd { margin: 0; font-size: 32px; line-height: 1.45; color: #E6E9EF; }
+.dark h2 { color: #FBF8F1 !important; }
+
+/* 표 */
+table.compare.tp { font-size: 30px; }
+table.compare.tp thead th { color: #FFFFFF; }
+table.compare.tp th, table.compare.tp td { padding: 10px 18px; }
+table.compare.tp td { text-align: center; }
+table.compare.tp td.left { text-align: left; }
+table.compare.tp tr.mid td, table.compare.tp tr.mid th { background: var(--orange-soft); color: #8A3D0F; }
+.ex { display: grid; grid-template-columns: 1fr 470px; gap: 32px; align-items: start; }
+.qs p { font-size: 28px; line-height: 1.5; margin: 0 0 10px; }
+</style>
+</head>
+<body data-theme="ppt">
+
+<!-- 1 표지 -->
+<section class="slide dark" id="cover" data-title="표지">
+  <div class="cv">
+    <div>
+      <p class="cv-k">진로와직업 · 검사 결과 읽기</p>
+      <h1>내 점수,<br>몇 등쯤일까?</h1>
+      <p class="cv-s">T점수와 백분위 쉽게 이해하기</p>
+    </div>
+    <svg width="420" height="320" viewBox="0 0 420 320" aria-label="종 모양 그래프와 가운데 표시선" data-enter="off">
+      <rect x="10" y="10" width="400" height="300" rx="20" fill="#FFFFFF" opacity=".08"/>
+      <path d="M30 270 C120 270 150 60 210 60 C270 60 300 270 390 270" fill="#2F6FB0" opacity=".55" stroke="#FBF8F1" stroke-width="6"/>
+      <path d="M210 50 V270" stroke="#F2A766" stroke-width="6" stroke-dasharray="14 10"/>
+      <path d="M30 272 H390" stroke="#FBF8F1" stroke-width="6"/>
+    </svg>
+  </div>
+</section>
+
+<!-- 2 왜 배우나 -->
+<section class="slide" id="why" data-sec="생각 열기" data-title="왜 배우나요?">
+  <h2>결과지 속 숫자, 읽을 수 있을까?</h2>
+  <div class="cards two">
+    <div class="card">
+      <h3>이런 곳에 나온다</h3>
+      <ul>
+        <li>진로심리검사(흥미·적성) 결과지</li>
+        <li>여러 검사와 시험의 결과표</li>
+        <li>나중에 고등학교 모의고사·수능에서 받는 성적표</li>
+      </ul>
+    </div>
+    <div class="card warm">
+      <h3 style="color:#8A3D0F">오늘의 목표</h3>
+      <p class="goal">T점수와 백분위를 보고<br>“나는 친구들 사이에서<br>어느 정도인지” 말할 수 있다.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 3 원점수의 한계 -->
+<section class="slide" id="raw" data-sec="생각 열기" data-title="원점수의 한계">
+  <h2>둘 다 80점, 실력도 같을까?</h2>
+  <div class="cards two">
+    <div class="card">
+      <h3 style="color:var(--blue)">수학</h3>
+      <p class="big80">80점</p>
+      <p style="color:var(--ink2)">반 평균 60점</p>
+      <p><b>평균보다 20점 높다</b></p>
+    </div>
+    <div class="card">
+      <h3 style="color:var(--orange)">영어</h3>
+      <p class="big80">80점</p>
+      <p style="color:var(--ink2)">반 평균 85점</p>
+      <p><b>평균보다 5점 낮다</b></p>
+    </div>
+  </div>
+  <p class="punch step">점수만 봐서는 모른다.<br><span class="hi">다른 친구들과 비교해야</span> 알 수 있다.</p>
+  <p class="note" style="margin-top:12px">※ 점수는 설명을 위한 예시다.</p>
+</section>
+
+<!-- 4 백분위 익스플로라그램 -->
+<section class="slide alt" id="pct-move" data-sec="백분위" data-title="100명 줄에서 내 자리">
+  <h2>100명 중 나보다 낮은 사람은 몇 %?</h2>
+  <div class="calc dh" data-ai="백분위 줄 서기 익스플로라그램" data-let="hi = 100 - n">
+    <div>
+      <p style="margin:0 0 6px;font-size:26px;color:var(--ink2)">100명이 점수 순서대로 한 줄로 섰다.</p>
+      <svg viewBox="0 0 640 230" aria-label="100명의 줄. 왼쪽은 나보다 점수가 낮은 사람, 오른쪽은 높은 사람, 그 사이에 나">
+        <text x="20" y="34" font-size="24" font-weight="700" fill="#3D4A63">← 점수 낮음</text>
+        <text x="620" y="34" font-size="24" font-weight="700" fill="#3D4A63" text-anchor="end">점수 높음 →</text>
+        <rect x="20" y="60" height="100" rx="14" fill="#F6D9C2" data-attr="width: 6 * n"/>
+        <rect y="60" height="100" rx="14" fill="#C9DAEC" data-attr="x: 20 + 6 * n; width: 6 * hi"/>
+        <path d="M20 176 V188 M320 176 V188 M620 176 V188" stroke="#3D4A63" stroke-width="3"/>
+        <text x="20" y="218" font-size="22" fill="#3D4A63" text-anchor="middle">0명</text>
+        <text x="320" y="218" font-size="22" fill="#3D4A63" text-anchor="middle">50명</text>
+        <text x="620" y="218" font-size="22" fill="#3D4A63" text-anchor="middle">100명</text>
+        <g data-attr="transform: 'translate(' + (20 + 6 * n) + ' 0)'">
+          <circle cx="0" cy="110" r="38" fill="#B4561A" stroke="#FBF8F1" stroke-width="5"/>
+          <text x="0" y="122" font-size="34" font-weight="700" fill="#FFFFFF" text-anchor="middle">나</text>
+        </g>
+      </svg>
+      <p class="legend"><span><i style="background:#F6D9C2"></i>나보다 낮은 사람 <output data-expr="n" data-unit="명"></output></span><span><i style="background:#C9DAEC"></i>나보다 높은 사람 <output data-expr="hi" data-unit="명"></output></span></p>
+    </div>
+    <div class="dh-ctrl">
+      <p>나보다 점수가 낮은 사람</p>
+      <input type="range" name="n" min="1" max="99" step="1" value="70" aria-label="나보다 점수가 낮은 사람 수">
+      <p class="eq jua">백분위 <output data-expr="n"></output></p>
+      <p>상위 <output data-expr="hi"></output>%</p>
+      <p>100명 중 약 <output data-expr="hi"></output>등</p>
+      <p class="say" data-show="n <= 10">줄의 맨 뒤쪽이다. 아주 낮은 편이다.</p>
+      <p class="say" data-show="n > 10 && n < 40">뒤쪽에 서 있다. 낮은 편이다.</p>
+      <p class="say" data-show="n >= 40 && n <= 60 && n != 50">가운데쯤에 서 있다.</p>
+      <p class="say" data-show="n == 50">딱 가운데다.</p>
+      <p class="say" data-show="n > 60 && n < 90">앞쪽에 서 있다. 높은 편이다.</p>
+      <p class="say" data-show="n >= 90">줄의 맨 앞쪽이다. 아주 높은 편이다.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 5 백분위 주의점 -->
+<section class="slide alt" id="pctmyth" data-sec="백분위" data-title="백분위 주의점">
+  <h2>백분위 70, 무슨 뜻일까?</h2>
+  <p style="margin:0 0 18px;font-size:28px;color:var(--ink2)">셋 가운데 맞는 말은 무엇일까?</p>
+  <div class="quiz">
+    <button class="opt" data-why="백분위는 점수가 아니다. 줄에서 내가 선 위치다.">“70점이라는 뜻이야.”</button>
+    <button class="opt" data-why="나보다 높은 사람이 30%니까 상위 30%다.">“상위 70%라는 뜻이야.”</button>
+    <button class="opt" data-ok data-why="맞다. 내 앞에 30명쯤, 내 뒤에 70명쯤 있다.">“100명 중 약 30등쯤이야.”</button>
+  </div>
+</section>
+
+<!-- 6 T점수: 똑같은 자 -->
+<section class="slide" id="tscore" data-sec="T점수" data-title="T점수: 모두에게 똑같은 자">
+  <h2>T점수: 모두에게 똑같은 자</h2>
+  <p style="margin:0 0 24px;font-size:28px;line-height:1.55;color:var(--ink2)">시험마다 평균도, 점수가 퍼진 정도도 다르다.<br>그래서 <b class="hi">평균은 50</b>, <b class="hi">한 칸은 10</b>이 되도록 눈금을 새로 맞춘 자로 잰다.<br>이 점수가 T점수다.</p>
+  <svg viewBox="0 0 1120 210" aria-label="T점수 자. 20부터 80까지, 가운데 50이 평균, 40은 한 칸 아래, 60은 한 칸 위" style="display:block;width:100%">
+    <rect x="0" y="0" width="1120" height="210" rx="20" fill="#FFFFFF" stroke="#E3DED3" stroke-width="2"/>
+    <rect x="80" y="40" width="960" height="8" rx="4" fill="#1F2A44"/>
+    <g font-family="Jua, sans-serif" font-size="40" text-anchor="middle" fill="#1F2A44">
+      <path d="M80 48 V84 M240 48 V84 M880 48 V84 M1040 48 V84" stroke="#1F2A44" stroke-width="6"/>
+      <path d="M400 48 V84 M720 48 V84" stroke="#2F6FB0" stroke-width="6"/>
+      <path d="M560 48 V104" stroke="#B4561A" stroke-width="10"/>
+      <text x="80" y="134">20</text><text x="240" y="134">30</text>
+      <text x="400" y="134" fill="#2F6FB0">40</text>
+      <text x="560" y="150" fill="#B4561A">50</text>
+      <text x="720" y="134" fill="#2F6FB0">60</text>
+      <text x="880" y="134">70</text><text x="1040" y="134">80</text>
+    </g>
+    <g font-size="26" font-weight="700" text-anchor="middle">
+      <text x="400" y="180" fill="#2F6FB0">한 칸 아래</text>
+      <text x="560" y="192" fill="#B4561A">딱 평균</text>
+      <text x="720" y="180" fill="#2F6FB0">한 칸 위</text>
+    </g>
+  </svg>
+  <p class="punch step">같은 자로 쟀으니 <span class="hi">과목이 달라도 비교</span>할 수 있다.</p>
+</section>
+
+<!-- 7 T점수 익스플로라그램: 같은 80점, 다른 T점수 -->
+<section class="slide" id="t-ruler" data-sec="T점수" data-title="같은 80점, 다른 T점수">
+  <h2>같은 80점인데 T점수는 왜 다를까?</h2>
+  <div class="calc dh" data-ai="원점수 자와 T점수 자 익스플로라그램" data-let="d = 80 - m; t = 50 + d * 10 / 10; xm = 40 + 5.6 * m; xt = 40 + 560 * (t - 20) / 60">
+    <svg viewBox="0 0 640 400" aria-label="위는 원점수 자, 아래는 T점수 자. 반 평균은 T점수 50으로, 내 점수 80점은 T점수 자의 한 자리로 옮겨진다" data-ai="모형 수치">
+      <text x="20" y="34" font-size="26" font-weight="700" fill="#3D4A63">원점수</text>
+      <text x="40" y="88" font-size="22" fill="#3D4A63" text-anchor="middle">0</text>
+      <text x="320" y="88" font-size="22" fill="#3D4A63" text-anchor="middle">50</text>
+      <text x="600" y="88" font-size="22" fill="#3D4A63" text-anchor="middle">100</text>
+      <rect x="40" y="100" width="560" height="10" rx="5" fill="#1F2A44"/>
+      <path d="M488 70 V100" stroke="#B4561A" stroke-width="4"/>
+      <circle cx="488" cy="105" r="16" fill="#B4561A"/>
+      <text x="488" y="58" font-size="24" font-weight="700" fill="#B4561A" text-anchor="middle">나 80점</text>
+      <g data-attr="transform: 'translate(' + xm + ' 0)'">
+        <path d="M0 116 L-14 140 H14 Z" fill="#2F6FB0"/>
+        <text x="0" y="168" font-size="24" font-weight="700" fill="#2F6FB0" text-anchor="middle">평균</text>
+      </g>
+      <path stroke="#2F6FB0" stroke-width="3" stroke-dasharray="8 7" fill="none" data-attr="d: 'M ' + xm + ' 176 L 320 300'"/>
+      <path stroke="#B4561A" stroke-width="3" stroke-dasharray="8 7" fill="none" data-attr="d: 'M 488 122 L ' + xt + ' 300'"/>
+      <text x="20" y="244" font-size="26" font-weight="700" fill="#3D4A63">T점수</text>
+      <rect x="40" y="304" width="560" height="10" rx="5" fill="#1F2A44"/>
+      <path d="M320 296 V330" stroke="#2F6FB0" stroke-width="5"/>
+      <text x="40" y="352" font-size="22" fill="#3D4A63" text-anchor="middle">20</text>
+      <text x="227" y="352" font-size="22" fill="#3D4A63" text-anchor="middle">40</text>
+      <text x="320" y="352" font-size="24" font-weight="700" fill="#2F6FB0" text-anchor="middle">50</text>
+      <text x="413" y="352" font-size="22" fill="#3D4A63" text-anchor="middle">60</text>
+      <text x="600" y="352" font-size="22" fill="#3D4A63" text-anchor="middle">80</text>
+      <g data-attr="transform: 'translate(' + xt + ' 0)'">
+        <circle cx="0" cy="309" r="16" fill="#B4561A"/>
+        <text x="0" y="388" font-size="24" font-weight="700" fill="#B4561A" text-anchor="middle">나</text>
+      </g>
+    </svg>
+    <div class="dh-ctrl">
+      <p>내 점수 <span class="hi">80점</span> (그대로)</p>
+      <p>반 평균 <output data-expr="m" data-unit="점"></output></p>
+      <input type="range" name="m" min="55" max="95" step="5" value="60" aria-label="반 평균">
+      <p>평균과의 차이 <output data-expr="(d > 0 ? '+' : d < 0 ? '−' : '') + abs(d) + '점'"></output></p>
+      <p class="eq jua">T점수 <output data-expr="t"></output></p>
+      <p class="say" data-show="t > 60">평균보다 한 칸 넘게 위다. 잘한 편이다.</p>
+      <p class="say" data-show="t > 50 && t <= 60">평균보다 조금 위다.</p>
+      <p class="say" data-show="t == 50">딱 평균이다.</p>
+      <p class="say" data-show="t < 50">점수는 80점이지만 평균보다 아래다.</p>
+      <p class="note" data-ai="모형 수치">점수가 평균에서 보통 10점씩 퍼진다고 정한 모형이다.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 8 종 모양 그래프 -->
+<section class="slide" id="bell" data-sec="T점수" data-title="T점수 읽는 법">
+  <h2>대부분은 40~60 사이에 있다</h2>
+  <svg viewBox="0 0 1120 410" style="display:block;width:100%" aria-label="종 모양 그래프. T점수 40에서 60 사이에 약 68%, 30에서 40 사이와 60에서 70 사이에 각각 약 14%, 30 아래와 70 위에 각각 약 2%">
+    <path d="M40 320 L40 317 L49 316 L57 316 L66 315 L75 314 L83 314 L92 313 L101 312 L109 310 L118 309 L127 308 L135 306 L144 304 L153 302 L161 300 L170 298 L179 295 L187 292 L196 289 L205 286 L213 282 L213 320 Z" fill="#E4EAF1"/>
+    <path d="M907 320 L907 282 L915 286 L924 289 L933 292 L941 295 L950 298 L959 300 L967 302 L976 304 L985 306 L993 308 L1002 309 L1011 310 L1019 312 L1028 313 L1037 314 L1045 314 L1054 315 L1063 316 L1071 316 L1080 317 L1080 320 Z" fill="#E4EAF1"/>
+    <path d="M213 320 L213 282 L222 278 L231 274 L239 269 L248 265 L257 259 L265 254 L274 248 L283 242 L291 236 L300 229 L309 222 L317 215 L326 207 L335 200 L343 192 L352 184 L361 175 L369 167 L378 159 L387 150 L387 320 Z" fill="#C9DAEC"/>
+    <path d="M733 320 L733 150 L742 159 L751 167 L759 175 L768 184 L777 192 L785 200 L794 207 L803 215 L811 222 L820 229 L829 236 L837 242 L846 248 L855 254 L863 259 L872 265 L881 269 L889 274 L898 278 L907 282 L907 320 Z" fill="#C9DAEC"/>
+    <path d="M387 320 L387 150 L395 142 L404 133 L413 125 L421 117 L430 109 L439 101 L447 93 L456 86 L465 79 L473 73 L482 67 L491 62 L499 57 L508 52 L517 49 L525 46 L534 43 L543 41 L551 40 L560 40 L569 40 L577 41 L586 43 L595 46 L603 49 L612 52 L621 57 L629 62 L638 67 L647 73 L655 79 L664 86 L673 93 L681 101 L690 109 L699 117 L707 125 L716 133 L725 142 L733 150 L733 320 Z" fill="#9DBEE0"/>
+    <path d="M40 317 L49 316 L57 316 L66 315 L75 314 L83 314 L92 313 L101 312 L109 310 L118 309 L127 308 L135 306 L144 304 L153 302 L161 300 L170 298 L179 295 L187 292 L196 289 L205 286 L213 282 L222 278 L231 274 L239 269 L248 265 L257 259 L265 254 L274 248 L283 242 L291 236 L300 229 L309 222 L317 215 L326 207 L335 200 L343 192 L352 184 L361 175 L369 167 L378 159 L387 150 L395 142 L404 133 L413 125 L421 117 L430 109 L439 101 L447 93 L456 86 L465 79 L473 73 L482 67 L491 62 L499 57 L508 52 L517 49 L525 46 L534 43 L543 41 L551 40 L560 40 L569 40 L577 41 L586 43 L595 46 L603 49 L612 52 L621 57 L629 62 L638 67 L647 73 L655 79 L664 86 L673 93 L681 101 L690 109 L699 117 L707 125 L716 133 L725 142 L733 150 L742 159 L751 167 L759 175 L768 184 L777 192 L785 200 L794 207 L803 215 L811 222 L820 229 L829 236 L837 242 L846 248 L855 254 L863 259 L872 265 L881 269 L889 274 L898 278 L907 282 L915 286 L924 289 L933 292 L941 295 L950 298 L959 300 L967 302 L976 304 L985 306 L993 308 L1002 309 L1011 310 L1019 312 L1028 313 L1037 314 L1045 314 L1054 315 L1063 316 L1071 316 L1080 317" fill="none" stroke="#1F2A44" stroke-width="4"/>
+    <path d="M560 40 V320" stroke="#B4561A" stroke-width="4" stroke-dasharray="12 10"/>
+    <path d="M40 320 H1080" stroke="#1F2A44" stroke-width="4"/>
+    <text x="560" y="230" font-family="Jua, sans-serif" font-size="60" text-anchor="middle" fill="#1F2A44">약 68%</text>
+    <text x="300" y="195" font-size="28" font-weight="700" text-anchor="middle" fill="#1F2A44">약 14%</text>
+    <text x="820" y="195" font-size="28" font-weight="700" text-anchor="middle" fill="#1F2A44">약 14%</text>
+    <text x="126" y="270" font-size="24" font-weight="700" text-anchor="middle" fill="#3D4A63">약 2%</text>
+    <text x="994" y="270" font-size="24" font-weight="700" text-anchor="middle" fill="#3D4A63">약 2%</text>
+    <g font-family="Jua, sans-serif" font-size="34" text-anchor="middle" fill="#1F2A44">
+      <text x="213" y="362">30</text><text x="387" y="362">40</text><text x="560" y="362" fill="#B4561A">50</text><text x="733" y="362">60</text><text x="907" y="362">70</text>
+    </g>
+    <g font-size="22" text-anchor="middle" fill="#3D4A63">
+      <text x="126" y="400">아주 낮은 편</text><text x="560" y="400" font-weight="700" fill="#B4561A">평균</text><text x="994" y="400">아주 높은 편</text>
+    </g>
+  </svg>
+  <p class="note" style="margin-top:8px">점수가 종 모양으로 퍼져 있다고 볼 때의 값이다.</p>
+</section>
+
+<!-- 9 T점수 ↔ 백분위 익스플로라그램 -->
+<section class="slide" id="bell-move" data-sec="T점수" data-title="T점수를 옮기면 백분위는?">
+  <h2>T점수를 옮기면 백분위는 어떻게 바뀔까?</h2>
+  <div class="calc dh" data-ai="종 모양 그래프 위 T점수와 백분위 익스플로라그램" data-let="z = (t - 50) / 10; a = abs(z) / sqrt(2); k = 1 / (1 + 0.3275911 * a); er = 1 - ((((1.061405429 * k - 1.453152027) * k + 1.421413741) * k - 0.284496736) * k + 0.254829592) * k * exp(-a * a); p = clamp(round(50 * (1 + sign(z) * er), 0), 1, 99); top = 100 - p; hy = exp(-z * z / 2)">
+    <div>
+      <figure class="plot" data-x="25, 75" data-y="0, 1.1" data-xstep="5" data-ystep="1" data-height="400" data-xlabel="T점수" data-ylabel="사람 수" aria-label="종 모양 그래프에서 지금 T점수보다 왼쪽이 칠해진다">
+        <i data-path="25, 0; 25 + (t - 25) * 0.0, exp(-((25 + (t - 25) * 0.0 - 50) / 10) ^ 2 / 2); 25 + (t - 25) * 0.0625, exp(-((25 + (t - 25) * 0.0625 - 50) / 10) ^ 2 / 2); 25 + (t - 25) * 0.125, exp(-((25 + (t - 25) * 0.125 - 50) / 10) ^ 2 / 2); 25 + (t - 25) * 0.1875, exp(-((25 + (t - 25) * 0.1875 - 50) / 10) ^ 2 / 2); 25 + (t - 25) * 0.25, exp(-((25 + (t - 25) * 0.25 - 50) / 10) ^ 2 / 2); 25 + (t - 25) * 0.3125, exp(-((25 + (t - 25) * 0.3125 - 50) / 10) ^ 2 / 2); 25 + (t - 25) * 0.375, exp(-((25 + (t - 25) * 0.375 - 50) / 10) ^ 2 / 2); 25 + (t - 25) * 0.4375, exp(-((25 + (t - 25) * 0.4375 - 50) / 10) ^ 2 / 2); 25 + (t - 25) * 0.5, exp(-((25 + (t - 25) * 0.5 - 50) / 10) ^ 2 / 2); 25 + (t - 25) * 0.5625, exp(-((25 + (t - 25) * 0.5625 - 50) / 10) ^ 2 / 2); 25 + (t - 25) * 0.625, exp(-((25 + (t - 25) * 0.625 - 50) / 10) ^ 2 / 2); 25 + (t - 25) * 0.6875, exp(-((25 + (t - 25) * 0.6875 - 50) / 10) ^ 2 / 2); 25 + (t - 25) * 0.75, exp(-((25 + (t - 25) * 0.75 - 50) / 10) ^ 2 / 2); 25 + (t - 25) * 0.8125, exp(-((25 + (t - 25) * 0.8125 - 50) / 10) ^ 2 / 2); 25 + (t - 25) * 0.875, exp(-((25 + (t - 25) * 0.875 - 50) / 10) ^ 2 / 2); 25 + (t - 25) * 0.9375, exp(-((25 + (t - 25) * 0.9375 - 50) / 10) ^ 2 / 2); 25 + (t - 25) * 1.0, exp(-((25 + (t - 25) * 1.0 - 50) / 10) ^ 2 / 2); t, 0" data-close data-fill data-color="#B4561A"></i>
+        <i data-line="exp(-((x - 50) / 10) ^ 2 / 2)" data-color="#1F2A44"></i>
+        <i data-vline="t" data-color="#B4561A"></i>
+        <i data-point="t, hy" data-label="나" data-color="#B4561A"></i>
+      </figure>
+    </div>
+    <div class="dh-ctrl">
+      <p>내 T점수 <output data-expr="t"></output></p>
+      <input type="range" name="t" min="25" max="75" step="1" value="50" aria-label="T점수">
+      <p class="eq jua">백분위 약 <output data-expr="p"></output></p>
+      <p>100명 중 약 <output data-expr="top"></output>등</p>
+      <p class="say">칠해진 넓이가 나보다 낮은 사람의 몫이다.</p>
+      <p class="say" data-show="t == 50">T점수 50은 백분위 50이다. 딱 가운데다.</p>
+      <p class="say" data-show="t == 60">T점수 60은 백분위 약 84다.<br>숫자는 달라도 같은 자리다.</p>
+      <p class="say" data-show="t >= 70">T점수 70을 넘으면<br>100명 중 2~3등 안쪽이다.</p>
+      <p class="say" data-show="t <= 30">T점수 30 아래는<br>100명 중 맨 뒤 2~3명쯤이다.</p>
+      <p class="note">종 모양으로 퍼져 있다고 볼 때의 근삿값이다.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 10 짝꿍 표 -->
+<section class="slide alt" id="table" data-sec="T점수" data-title="T점수와 백분위 짝꿍 표">
+  <h2>T점수와 백분위는 짝꿍이다</h2>
+  <table class="compare tp" style="width:100%;table-layout:fixed">
+    <thead><tr><th style="width:18%">T점수</th><th style="width:22%">백분위(약)</th><th style="width:60%">이렇게 읽는다</th></tr></thead>
+    <tbody>
+      <tr><th>30</th><td>2</td><td class="left">아주 낮은 편 (100명 중 약 98등)</td></tr>
+      <tr><th>40</th><td>16</td><td class="left">조금 낮은 편 (100명 중 약 84등)</td></tr>
+      <tr class="mid"><th>50</th><td>50</td><td class="left">딱 중간 (100명 중 약 50등)</td></tr>
+      <tr><th>60</th><td>84</td><td class="left">조금 높은 편 (100명 중 약 16등)</td></tr>
+      <tr><th>70</th><td>98</td><td class="left">아주 높은 편 (100명 중 약 2등)</td></tr>
+    </tbody>
+  </table>
+  <p class="note" style="margin-top:16px">종 모양 분포로 본 근삿값이다. 검사마다 조금씩 다를 수 있다.</p>
+</section>
+
+<!-- 11 결과지 읽기 -->
+<section class="slide" id="example" data-sec="결과지 읽기" data-title="야옹이의 흥미검사 결과">
+  <h2>야옹이의 흥미검사 결과</h2>
+  <div class="ex">
+    <div>
+      <table class="compare tp" data-ai="가상 예시 결과지">
+        <thead><tr><th>흥미 유형</th><th>T점수</th><th>백분위</th></tr></thead>
+        <tbody>
+          <tr><th>탐구형</th><td>65</td><td>93</td></tr>
+          <tr><th>예술형</th><td>58</td><td>79</td></tr>
+          <tr><th>사회형</th><td>50</td><td>50</td></tr>
+          <tr><th>현실형</th><td>42</td><td>21</td></tr>
+        </tbody>
+      </table>
+      <p class="note" style="margin-top:12px">※ 실제 검사 결과가 아닌, 설명을 위해 만든 가상 예시다.</p>
+    </div>
+    <div class="card warm qs">
+      <h3 style="color:#8A3D0F">함께 생각해 보자</h3>
+      <p><b>Q1.</b> 야옹이의 흥미가 가장 높은 유형은?</p>
+      <p><b>Q2.</b> 사회형 T점수 50은 무슨 뜻일까?</p>
+      <p><b>Q3.</b> 현실형 백분위 21을 말로 풀면?</p>
+    </div>
+  </div>
+</section>
+
+<!-- 12 결과지 정답 -->
+<section class="slide" id="exans" data-sec="결과지 읽기" data-title="결과지 정답">
+  <h2>야옹이 결과지, 이렇게 읽는다</h2>
+  <div class="cards three">
+    <div class="card">
+      <p><span class="lab ok" style="background:var(--green-soft)">Q1 정답</span></p>
+      <p class="ask-q">흥미가 가장 높은 유형은?</p>
+      <p class="ans">탐구형</p>
+      <p style="color:var(--ink2)">T점수 65, 백분위 93으로 가장 높다. 100명 중 약 7등쯤이다.</p>
+    </div>
+    <div class="card">
+      <p><span class="lab ok" style="background:var(--green-soft)">Q2 정답</span></p>
+      <p class="ask-q">사회형 T점수 50의 뜻은?</p>
+      <p class="ans">딱 평균</p>
+      <p style="color:var(--ink2)">친구들과 비교해 중간 정도의 관심이다.</p>
+    </div>
+    <div class="card">
+      <p><span class="lab ok" style="background:var(--green-soft)">Q3 정답</span></p>
+      <p class="ask-q">현실형 백분위 21을 말로 풀면?</p>
+      <p class="ans">100명 중 21명쯤이 나보다 낮다</p>
+      <p style="color:var(--ink2)">다른 유형보다 관심이 적은 편이다.</p>
+    </div>
+  </div>
+  <p class="punch">흥미검사 점수는 잘하고 못함이 아니라 <span class="hi">관심의 크기</span>다.</p>
+</section>
+
+<!-- 13 퀴즈 1 -->
+<section class="slide alt" id="quiz-1" data-sec="확인 퀴즈" data-title="확인 퀴즈 1, 2">
+  <h2>이제 맞혀 볼까?</h2>
+  <p class="q" data-n="1">T점수 50은 어떤 뜻일까?</p>
+  <div class="quiz" data-cols="3">
+    <button class="opt" data-why="T점수는 원점수가 아니다. 50점을 받았다는 뜻이 아니다.">50점을 받았다</button>
+    <button class="opt" data-ok data-why="맞다. T점수는 평균을 50으로 맞춘 점수다.">딱 평균이다</button>
+    <button class="opt" data-why="평균보다 높으면 T점수가 50보다 크다.">평균보다 높다</button>
+  </div>
+  <p class="q" data-n="2" style="margin-top:22px">백분위 90이면 100명 중 대략 몇 등일까?</p>
+  <div class="quiz" data-cols="3">
+    <button class="opt" data-ok data-why="맞다. 나보다 낮은 사람이 90명쯤이니 약 10등이다.">약 10등</button>
+    <button class="opt" data-why="90은 나보다 낮은 사람의 수다. 90등이 아니다.">약 90등</button>
+    <button class="opt" data-why="50등은 백분위 50쯤일 때다.">약 50등</button>
+  </div>
+</section>
+
+<!-- 14 퀴즈 2 -->
+<section class="slide alt" id="quiz-2" data-sec="확인 퀴즈" data-title="확인 퀴즈 3">
+  <h2>이제 맞혀 볼까?</h2>
+  <p class="q" data-n="3">“T점수 60”과 “백분위 84”, 어느 쪽이 더 잘한 걸까?</p>
+  <div class="quiz">
+    <button class="opt" data-why="T점수 60은 백분위로 약 84다. 더 잘한 것이 아니다.">T점수 60이 더 잘했다</button>
+    <button class="opt" data-why="84가 60보다 크지만, 두 숫자는 재는 자가 다르다.">백분위 84가 더 잘했다</button>
+    <button class="opt" data-ok data-why="맞다. T점수 60은 백분위로 약 84다. 거의 같은 자리를 다르게 말했다.">거의 같은 자리다</button>
+  </div>
+</section>
+
+<!-- 15 퀴즈 정답 -->
+<section class="slide alt" id="quizans" data-sec="확인 퀴즈" data-title="퀴즈 정답">
+  <h2>몇 개나 맞혔을까?</h2>
+  <div class="cards three">
+    <div class="card">
+      <p><span class="lab ok" style="background:var(--green-soft)">Q1 정답</span></p>
+      <p class="ask-q">T점수 50은 어떤 뜻일까?</p>
+      <p class="ans" style="color:var(--blue)">평균, 딱 중간</p>
+      <p style="color:var(--ink2)">T점수는 평균을 50으로 맞춘 점수다.</p>
+    </div>
+    <div class="card">
+      <p><span class="lab ok" style="background:var(--green-soft)">Q2 정답</span></p>
+      <p class="ask-q">백분위 90이면 대략 몇 등?</p>
+      <p class="ans" style="color:var(--blue)">약 10등</p>
+      <p style="color:var(--ink2)">나보다 낮은 사람이 90명쯤이기 때문이다.</p>
+    </div>
+    <div class="card">
+      <p><span class="lab ok" style="background:var(--green-soft)">Q3 정답</span></p>
+      <p class="ask-q">“T점수 60”과 “백분위 84”?</p>
+      <p class="ans" style="color:var(--blue)">함정! 거의 같다</p>
+      <p style="color:var(--ink2)">T점수 60은 백분위로 약 84다.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 16 정리 -->
+<section class="slide dark" id="wrap" data-title="오늘의 정리">
+  <p class="kicker" style="color:#F2A766">오늘의 정리</p>
+  <h2>숫자는 나를 비추는 거울 하나다</h2>
+  <dl class="sum">
+    <dt>백분위</dt><dd>100명 중 나보다 낮은 사람이 몇 명쯤인지</dd>
+    <dt>T점수</dt><dd>평균 50, 한 칸 10인 똑같은 자로 잰 내 위치</dd>
+    <dt>기억하자</dt><dd>점수는 지금의 모습일 뿐,<br>경험하면서 얼마든지 달라질 수 있다</dd>
+  </dl>
+</section>
+
+</body>
+</html>
